@@ -70,7 +70,7 @@
             }
         });
     </script>
-        
+    
 
     <label for="price">Price:</label>
     <input type="number" name="price" id="price" required>
@@ -85,6 +85,32 @@
     <label for="image">Image:</label>
     <input type="file" name="image" id="image" required>
 
+    <label for="year">Select Car Year:</label>
+    <select id="year" name="year" class="form-control">
+        <option value="">Select a year</option>
+        @for ($year = 1900; $year <= 2023; $year++)
+            <option value="{{ $year }}">{{ $year }}</option>
+        @endfor
+    </select>
+
+    <div class="form-group">
+        <label for="fuel">Select Fuel Type:</label>
+        <select id="fuel" name="fuel" class="form-control">
+            <option value="">Select fuel type</option>
+            @foreach($fuelOptions as $fuel)
+                <option value="{{ $fuel }}">{{ $fuel }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <label for="city">Select a City:</label>
+        <select id="city" name="city" class="form-control">
+            <option value="">Select a city</option>
+            @foreach($cities as $city)
+                <option value="{{ $city }}">{{ $city }}</option>
+            @endforeach
+        </select>
+    
 
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>

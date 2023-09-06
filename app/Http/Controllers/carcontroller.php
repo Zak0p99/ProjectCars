@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\car;
 use Illuminate\Http\Request;
 use App\Models\Car as CarModel; // Import your Car model
+use Illuminate\Support\Facades\File;
+
 
 class carcontroller extends Controller
 {
@@ -23,7 +25,7 @@ class carcontroller extends Controller
     {
         // Load the brands JSON data (if needed)
     $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
-
+    $cities = json_decode(file_get_contents(public_path('city_names.json')));
 
     // Define an array of fuel options
     $fuelOptions = [
@@ -33,7 +35,7 @@ class carcontroller extends Controller
         'Hybrid',
         'Other',
     ];
-    return view('cars.create', compact('brandsWithModels', 'fuelOptions'));
+    return view('cars.create', compact('brandsWithModels', 'fuelOptions','cities'));
     }
 
     /**
@@ -51,6 +53,9 @@ class carcontroller extends Controller
             'description' => 'required',
             'image' => 'required|image', // Adjust file types and size as needed
             'mileage' => 'required|numeric',
+            'fuel' => 'required',
+            'year' => 'required|numeric',
+            'city' => 'required',
         ]);
 
         // Upload and store the image
@@ -71,7 +76,10 @@ class carcontroller extends Controller
         $car->description = $validatedData['description'];
         $car->image = $imagePath; // Save the image path
         $car->mileage = $validatedData['mileage'];
-
+        $car->fuel = $validatedData['fuel'];
+        $car->year = $validatedData['year'];
+        $car->city = $validatedData['city'];
+        $car->city = $request->input('city');
         // Save the car record to the database
         $car->save();
 
