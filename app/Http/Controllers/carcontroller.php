@@ -34,11 +34,14 @@ class CarController extends Controller
     }
     public function searchresult(Request $request)
 {
+    
     $brand = $request->input('carBrand');
     $model = $request->input('carModel');
     $maxPrice = $request->input('maxPrice');
     $minYear = $request->input('minYear');
     $maxMileage = $request->input('maxMileage');
+    $fuel = $request->input('fuel');
+    $city = $request->input('city');
 
     // Perform the database query based on the selected options
     $cars = Car::query()
@@ -56,6 +59,16 @@ class CarController extends Controller
         })
         ->when($maxMileage, function ($query) use ($maxMileage) {
             $query->where('mileage', '<=', $maxMileage);
+        })
+        ->when(!empty($fuel), function ($query) use ($fuel) {
+            if (is_array($fuel)) {
+                $query->whereIn('fuel', $fuel);
+            } else {
+                $query->where('fuel', $fuel);
+            }
+        })
+        ->when($city, function ($query) use ($city) {
+            $query->where('city', $city);
         })
         ->get();
 

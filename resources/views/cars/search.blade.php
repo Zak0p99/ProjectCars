@@ -81,14 +81,25 @@
         </select>
     </div>
 
+    <!-- Dropdown for Fuel -->
+    <div class="form-group">
+        <label for="fuel">Select Fuel Type:</label>
+        <select id="fuel" name="fuel" class="form-control">
+            <option value="">Select fuel type</option>
+            @foreach($fuelOptions as $fuel)
+                <option value="{{ $fuel }}">{{ $fuel }}</option>
+            @endforeach
+        </select>
+    </div>
+
     <!-- Dropdown for Maximum Mileage -->
     <div class="form-group">
         <label for="maxMileage">Select Maximum Mileage:</label>
         <select id="maxMileage" name="maxMileage" class="form-control">
             <option value="">Any</option>
-            <option value="10000">10,000</option>
-            <option value="20000">20,000</option>
-            <!-- Add more options or generate them dynamically -->
+            @for ($mileage = 10000; $mileage <= 110000; $mileage += 10000)
+                <option value="{{ $mileage }}">{{ number_format($mileage) }}</option>
+            @endfor
         </select>
     </div>
 

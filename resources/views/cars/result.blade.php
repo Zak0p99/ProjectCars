@@ -15,9 +15,11 @@
                     <th>Year</th>
                     <th>Mileage</th>
                     <th>Description</th>
+                    <th>City</th>
                     <th>Image</th>
                     <th>Created At</th>
                     <th>Fuel</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +31,7 @@
                         <td>{{ $car->year }}</td>
                         <td>{{ $car->mileage }}</td>
                         <td>{{ $car->description }}</td>
+                        <td>{{ $car->city }}</td>
                         <td><img src="{{ asset('storage/images/' . $car->image) }}" alt="Car Image" width="100"></td>
                         <td>{{ $car->created_at }}</td>
                         <td>{{ $car->fuel}}</td>
