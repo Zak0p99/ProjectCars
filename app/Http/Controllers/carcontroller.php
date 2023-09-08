@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\car;
 use Illuminate\Http\Request;
-use App\Models\Car as CarModel; // Import your Car model
+//use App\Models\Car as CarModel; // Import your Car model 
 use Illuminate\Support\Facades\File;
 
 
-class carcontroller extends Controller
+class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +18,49 @@ class carcontroller extends Controller
         //
     }
 
+    public function search(){
+    
+    $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
+    $cities = json_decode(file_get_contents(public_path('city_names.json')));
+    // Define an array of fuel options
+    $fuelOptions = [
+        'Gasoline',
+        'Diesel',
+        'Electric',
+        'Hybrid',
+        'Other',
+    ];  
+        return view('cars.search', compact('brandsWithModels', 'fuelOptions','cities'));
+    }
+    public function searchresult(Request $request)
+{
+    $brand = $request->input('carBrand');
+    $model = $request->input('carModel');
+    $maxPrice = $request->input('maxPrice');
+    $minYear = $request->input('minYear');
+    $maxMileage = $request->input('maxMileage');
+
+    // Perform the database query based on the selected options
+    $cars = Car::query()
+        ->when($brand, function ($query) use ($brand) {
+            $query->where('carbrand', $brand);
+        })
+        ->when($model, function ($query) use ($model) {
+            $query->where('carmodel', $model);
+        })
+        ->when($maxPrice, function ($query) use ($maxPrice) {
+            $query->where('price', '<=', $maxPrice);
+        })
+        ->when($minYear, function ($query) use ($minYear) {
+            $query->where('year', '>=', $minYear);
+        })
+        ->when($maxMileage, function ($query) use ($maxMileage) {
+            $query->where('mileage', '<=', $maxMileage);
+        })
+        ->get();
+
+    return view('cars.result', compact('cars'));
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -79,7 +122,7 @@ class carcontroller extends Controller
         $car->fuel = $validatedData['fuel'];
         $car->year = $validatedData['year'];
         $car->city = $validatedData['city'];
-        $car->city = $request->input('city');
+
         // Save the car record to the database
         $car->save();
 

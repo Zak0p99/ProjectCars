@@ -1,0 +1,96 @@
+@extends('cars.layout')
+
+@section('content')
+
+<h1>Search for Car</h1>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include your JavaScript file -->
+<script src="{{ asset('js/car-dropdown.js') }}"></script>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form action="{{ route('cars.searchresult') }}" method="GET" enctype="multipart/form-data">
+    
+    @csrf
+
+    <!-- First Dropdown for Car Brand -->
+    <label for="carBrand">Select Car Brand:</label>
+    <select id="carBrand" name="carBrand">
+        <option value="">Select a brand</option>    
+        @foreach($brandsWithModels as $brand => $models)
+            <option value="{{ $brand }}">{{ $brand }}</option>
+        @endforeach
+    </select>
+
+    <!-- Second Dropdown for Car Models -->
+    <label for="carModel">Select Car Model:</label>
+    <select id="carModel" name="carModel">
+        <option value="">Select a model</option>
+    </select>
+
+    <script>
+        // JavaScript to populate the second dropdown based on the selected brand
+        const carBrandSelect = document.getElementById('carBrand');
+        const carModelSelect = document.getElementById('carModel');
+
+        carBrandSelect.addEventListener('change', function () {
+            const selectedBrand = carBrandSelect.value;
+            const models = @json($brandsWithModels);
+
+            // Clear the previous options
+            carModelSelect.innerHTML = '<option value="">Select a model</option>';
+
+            if (selectedBrand !== '') {
+                models[selectedBrand].forEach(function (model) {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.text = model;
+                    carModelSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
+
+    <!-- Dropdown for Maximum Price -->
+    <div class="form-group">
+        <label for="maxPrice">Select Maximum Price:</label>
+        <select id="maxPrice" name="maxPrice" class="form-control">
+            <option value="">Any</option>
+            @for ($price = 10000; $price <= 5000000; $price += 10000)
+                <option value="{{ $price }}">{{ number_format($price) }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <!-- Dropdown for Minimum Year -->
+    <div class="form-group">
+        <label for="minYear">Select Minimum Year:</label>
+        <select id="minYear" name="minYear" class="form-control">
+            <option value="">Any</option>
+            @for ($year = 1900; $year <= 2023; $year++)
+                <option value="{{ $year }}">{{ $year }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <!-- Dropdown for Maximum Mileage -->
+    <div class="form-group">
+        <label for="maxMileage">Select Maximum Mileage:</label>
+        <select id="maxMileage" name="maxMileage" class="form-control">
+            <option value="">Any</option>
+            <option value="10000">10,000</option>
+            <option value="20000">20,000</option>
+            <!-- Add more options or generate them dynamically -->
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
