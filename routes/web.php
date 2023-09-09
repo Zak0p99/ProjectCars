@@ -33,3 +33,7 @@ Route::resource('cars', CarController::class); // Define the resource route for 
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
