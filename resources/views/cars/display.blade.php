@@ -1,4 +1,4 @@
-@extends('cars.layout')
+@extends('layouts.app')
 
 @section('content')
 

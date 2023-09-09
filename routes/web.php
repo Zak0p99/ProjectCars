@@ -19,7 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 }); 
 
+
+
 Route::get('/cars/search',[CarController::class,'search'])->name('cars.search');
+
+Route::get('cars/create', 'CarController@create')->middleware('auth');
 
 Route::get('/cars/searchresult',[CarController::class,'searchresult'])->name('cars.searchresult');
 
@@ -28,6 +32,8 @@ Route::post('/cars', [CarController::class, 'store'])->name('cars.store'); // De
 Route::get('/display', [DisplayController::class, 'index'])->name('cars.display');
 
 Route::resource('cars', CarController::class); // Define the resource route for cars.
+
+
 
 
 

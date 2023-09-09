@@ -15,7 +15,17 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
+        $cities = json_decode(file_get_contents(public_path('city_names.json')));
+        // Define an array of fuel options
+        $fuelOptions = [
+            'Gasoline',
+            'Diesel',
+            'Electric',
+            'Hybrid',
+            'Other',
+        ];  
+            return view('cars.search', compact('brandsWithModels', 'fuelOptions','cities'));
     }
 
     public function search(){
@@ -135,7 +145,7 @@ class CarController extends Controller
         $car->fuel = $validatedData['fuel'];
         $car->year = $validatedData['year'];
         $car->city = $validatedData['city'];
-
+        $car->user_id = Auth::id();
         // Save the car record to the database
         $car->save();
 

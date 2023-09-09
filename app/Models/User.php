@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
+     // Define the cars relationship
+     public function cars()
+     {
+         return $this->hasMany(Car::class);
+     }
 }
