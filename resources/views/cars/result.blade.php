@@ -42,7 +42,9 @@
                                             <td><img src="{{ asset($car->image) }}" alt="Car Image" width="100"></td>
                                             <td>{{ $car->created_at }}</td>
                                             <td>{{ $car->fuel }}</td>
-                                            <td>{{ $car->user->name }}</td>
+                                            <td><a
+                                                    href="{{ route('user.profile', $car->user->id) }}">{{ $car->user->name }}</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
