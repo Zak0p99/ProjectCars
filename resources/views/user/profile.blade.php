@@ -5,13 +5,29 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Car Search Results') }}</div>
+                    <div class="card-header">User Profile</div>
 
                     <div class="card-body">
 
-                        @if ($cars->isEmpty())
-                            <p>No cars found matching your criteria.</p>
-                        @else
+                        <body>
+                            <h1>User Profile</h1>
+                            <p>Email: {{ $profile->email }}</p>
+                            <p>Phone Number: {{ $profile->phone_number }}</p>
+
+                        </body>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Displayed Cars</div>
+
+                    <div class="card-body">
+
+                        <body>
                             <table>
                                 <thead>
                                     <tr>
@@ -47,7 +63,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        @endif
+
+                        </body>
 
                     </div>
                 </div>

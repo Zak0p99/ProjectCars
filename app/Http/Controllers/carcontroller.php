@@ -6,6 +6,7 @@ use App\Models\car;
 use Illuminate\Http\Request;
 //use App\Models\Car as CarModel; // Import your Car model 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 
 class CarController extends Controller
@@ -109,7 +110,21 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-       // $uploadedFile = $request->file('image');
+        $hmcars=Car::where('user_id', Auth::user()->id)->get();
+        $user = Auth::user();
+        if($user->dealership){
+            if(count($hmcars)>=10){
+                return redirect()->route('cars.create')->with('error', 'You can only have 10 cars listed at a time with normal account.');
+            }
+            
+        }
+        else{
+            if(count($hmcars)>=3){
+                return redirect()->route('cars.create')->with('error', 'You can only have 3 cars listed at a time with normal account.');
+            }
+        }
+        
+
         
         // Validate the form data
         $validatedData = $request->validate([
@@ -149,7 +164,7 @@ class CarController extends Controller
         // Save the car record to the database
         $car->save();
 
-        return redirect()->route('cars.display')->with('success', 'Car created successfully');
+        return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car created successfully');
 
     }
 

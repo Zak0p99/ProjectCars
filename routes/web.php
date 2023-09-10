@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController; // Import the CarController class.
 use App\Http\Controllers\DisplayController; // Import the DisplayController class.
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/cars/search',[CarController::class,'search'])->name('cars.search');
 
-Route::get('cars/create', 'CarController@create')->middleware('auth');
+
 
 Route::get('/cars/searchresult',[CarController::class,'searchresult'])->name('cars.searchresult');
 
@@ -31,7 +31,24 @@ Route::post('/cars', [CarController::class, 'store'])->name('cars.store'); // De
 
 Route::get('/display', [DisplayController::class, 'index'])->name('cars.display');
 
+
+Route::get('cars/create', 'CarController@create')->middleware('auth');
+
 Route::resource('cars', CarController::class); // Define the resource route for cars.
+
+Route::resource('profile', ProfileController::class); // Define the resource route for profiles.
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile/{user}', 'ProfileController@show')->name('user.profile');
+}); // Define the route for displaying a user's profile.
+
+
+
+
+
+
+
+
 
 
 
@@ -43,3 +60,4 @@ Route::resource('cars', CarController::class); // Define the resource route for 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

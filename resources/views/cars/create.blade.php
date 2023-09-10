@@ -12,7 +12,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"> </div>
+
+                    @if (session('error'))
+                        <div class="card-header">
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    @endif
+
 
                     <div class="card-body">
                         <div class="row">
@@ -40,7 +48,7 @@
                             @csrf
                             <!-- First Dropdown for Car Brand -->
                             <label for="carBrand">Select Car Brand:</label>
-                            <select id="carBrand" name="carBrand">
+                            <select class="form-select" id="carBrand" name="carBrand">
                                 <option value="">Select a brand</option>
                                 @foreach ($brandsWithModels as $brand => $models)
                                     <option value="{{ $brand }}">{{ $brand }}</option>
@@ -49,7 +57,7 @@
 
                             <!-- Second Dropdown for Car Models -->
                             <label for="carModel">Select Car Model:</label>
-                            <select id="carModel" name="carModel">
+                            <select class="form-select" id="carModel" name="carModel">
                                 <option value="">Select a model</option>
                             </select>
 
@@ -81,7 +89,7 @@
                             <input class="form-control" type="number" name="price" id="price" required>
 
                             <label for="description">Description:</label>
-                            <textarea name="description" id="description" required></textarea>
+                            <textarea class="form-control" name="description" id="description" required></textarea>
 
 
                             <label for="mileage">Mileage:</label>
