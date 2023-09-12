@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    </head>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -53,6 +63,83 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                @foreach ($cars as $car)
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                                src="{{ asset($car->image) }}"></div>
+                        <div class="col-md-6 mt-1">
+                            <h2 style="color: black ; display:inline">{{ $car->carbrand }}</h2>
+                            <b>Modele</b>
+                            <h3 style="color: rgb(172, 179, 179) ; display:inline "> {{ $car->carmodel }}
+                            </h3>
+                            <div>
+                                <span><b>Year : </b>{{ $car->year }}</span>
+                                <br />
+                                <span><b>kilométrage : </b>{{ $car->mileage }}km</span>
+                            </div>
+                            <div> <span><b>Fuel : </b>{{ $car->fuel }}</span>
+                                <br><span class="material-symbols-outlined">
+                                    location_on
+                                </span><b>City :
+                                </b>{{ $car->city }}</span>
+                            </div>
+                            <br />
+                            <h5 class="mt-1 mb-1">Description :</h5>
+                            <p class="text-justify text-truncate para mb-0"><span>{{ $car->description }}
+                                </span><br><br></p>
+                        </div>
+                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                            <div class="d-flex flex-row align-items-center">
+                                <h4 class="mr-1">{{ $car->price }} Dhs</h4>
+                            </div>
+
+                            <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button"
+                                    style="height: 3.5rem ; font-size:20px ; font-weight:bold">Details</button>
+                                <a class="btn btn-outline-primary btn-sm mt-2" href="#" data-toggle="modal"
+                                    data-target="#contactSellerModal_{{ $car->id }}">
+                                    Contact Seller
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="contactSellerModal_{{ $car->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="contactSellerModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="text-align: center;">
+                                    <div style="text-align: center;">
+                                        <h5 class="modal-title" id="contactSellerModalLabel" style="display: inline-block;">
+                                            Contact Seller</h5>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add your contact form or content here -->
+                                    <b>Name: </b>{{ $car->user->name }}<br>
+                                    <b>Email: </b>{{ $car->user->email }}<br>
+
+                                    <b>Phone Number: </b>{{ $car->user->phonenumber }}
+                                    <br>
+                                    <a href="{{ route('user.profile', $car->user->id) }}">View Profile</a>
+                                    <!-- You can use Laravel Blade directives to include a form or any other content -->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- Add additional buttons if needed -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </div>
