@@ -12,7 +12,9 @@
                         <body>
                             <h1>User Profile</h1>
                             <p>Email: {{ $profile->email }}</p>
-                            <p>Phone Number: {{ $profile->phonenumber }}</p>
+                            <p>Name: {{ $profile->name }}</p>
+                            <p>Joined The: {{ $profile->created_at }}</p>
+                            <p>Phone Number: {{ $profile->phone_number }}</p>
 
                         </body>
 
