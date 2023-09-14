@@ -4,22 +4,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card flex-row  align-items-center">
 
-
+                    <img class="card-img-left w-25 h-25 rounded-circle p-2"
+                        src="{{ asset('storage/' . $profile->profile_picture) }}" alt="Profile Picture">
                     <div class="card-body">
 
-                        <body>
-                            <h1>User Profile</h1>
-                            <p>Email: {{ $profile->email }}</p>
-                            <p>Name: {{ $profile->name }}</p>
-                            <p>Joined The: {{ $profile->created_at }}</p>
-                            <p>Phone Number: {{ $profile->phone_number }}</p>
-                            <img src="{{ asset('storage/app' . $profile->profile_picture) }}" alt="Profile Picture">
-                            <p>Profile Picture Path: {{ $profile->profile_picture }}</p>
+
+                        <h1>User Profile</h1>
+                        <p>Email: {{ $profile->email }}</p>
+                        <p>Name: {{ $profile->name }}</p>
+                        <p>Joined The: {{ $profile->created_at }}</p>
+                        <p>Phone Number: {{ $profile->phone_number }}</p>
 
 
-                        </body>
+
+
+
 
                     </div>
                 </div>
