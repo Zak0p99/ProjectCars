@@ -28,6 +28,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         .custom-card-body {
             max-width: 800px;
@@ -111,6 +113,15 @@
                         @else
                             <ul class="navbar-nav ml-auto flex-row align-items-center">
                                 <!-- First list item -->
+                                <li class="nav-item me-3">
+                                    <!-- Add margin-left (ms-3) class to create horizontal spacing -->
+                                    <a href="{{ route('cars.search') }}" class="btn custom-btn d-flex align-items-center">
+                                        <span class="material-symbols-outlined me-1">
+                                            search
+                                        </span>
+                                        Search for your dream car
+                                    </a>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <!-- Use Bootstrap classes to style the clickable dropdown button -->
                                     <a id="navbarDropdown"

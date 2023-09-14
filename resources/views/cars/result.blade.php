@@ -119,7 +119,7 @@
                                     <b>Name: </b>{{ $car->user->name }}<br>
                                     <b>Email: </b>{{ $car->user->email }}<br>
 
-                                    <b>Phone Number: </b>{{ $car->user->phonenumber }}
+                                    <b>Phone Number: </b>{{ $car->user->phone_number }}
                                     <br>
                                     <a href="{{ route('user.profile', $car->user->id) }}">View Profile</a>
                                     <!-- You can use Laravel Blade directives to include a form or any other content -->

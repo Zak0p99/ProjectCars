@@ -80,7 +80,7 @@
                                 <div class="modal-body">
                                     <p><b>Name: </b>{{ $car->user->name }}</p>
                                     <p><b>Email: </b>{{ $car->user->email }}</p>
-                                    <p><b>Phone Number: </b>{{ $car->user->phonenumber }}</p>
+                                    <p><b>Phone Number: </b>{{ $car->user->phone_number }}</p>
                                     <p><a href="{{ route('user.profile', $car->user->id) }}">View Profile</a></p>
                                 </div>
                                 <div class="modal-footer">
