@@ -18,10 +18,6 @@
                         <p>Phone Number: {{ $profile->phone_number }}</p>
 
 
-
-
-
-
                     </div>
                 </div>
             </div>

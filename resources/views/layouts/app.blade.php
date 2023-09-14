@@ -75,14 +75,18 @@
     </style>
 </head>
 
-<body>
+<body class="vw-100" style="background-image: url({{ asset('5517618.jpg') }})">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-5">
             <div class="container">
-                <a class="navbar-brand" style="font-weight: bold ; font-size:25px ; left:-100px ; position:relative ;"
-                    href="{{ url('/cars/search') }}"><img src="{{ asset('/logo.png') }}" alt="logo" height="50">
-                    Car Marketplace
-                </a>
+                <div class="d-flex  justify-content-center align-items-center">
+                    <a class="navbar-brand"
+                        style="font-weight: bold ; font-size:25px ; left:-100px ; position:relative ;"
+                        href="{{ url('/cars/search') }}"><img src="{{ asset('/logo.png') }}" alt="logo"
+                            height="35">
+                        Car Marketplace
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -180,7 +184,7 @@
     </div>
     </nav>
 
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
     </div>
