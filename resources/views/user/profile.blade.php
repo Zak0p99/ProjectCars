@@ -17,6 +17,12 @@
                         <p>Joined The: {{ $profile->created_at }}</p>
                         <p>Phone Number: {{ $profile->phone_number }}</p>
 
+                        @if ($profile->id == Auth::user()->id)
+                            <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-primary">Edit Profile</a>
+                        @endif
+
+
+
 
                     </div>
                 </div>

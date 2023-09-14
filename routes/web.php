@@ -19,12 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 }); 
 
+Route::put('/profile/{id}', [ProfileController::class,'update'])->name('profile.update');
 
 
 Route::get('/cars/search',[CarController::class,'search'])->name('cars.search');
 
 
 Route::get('/car/details/{id}', [CarController::class, 'showDetails'])->name('car.details');
+
 
 
 
