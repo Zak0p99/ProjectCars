@@ -109,30 +109,35 @@
                                 </li>
                             @endif
                         @else
-                            <ul class="navbar-nav ml-auto">
+                            <ul class="navbar-nav ml-auto flex-row align-items-center">
                                 <!-- First list item -->
                                 <li class="nav-item dropdown">
                                     <!-- Use Bootstrap classes to style the clickable dropdown button -->
                                     <a id="navbarDropdown"
-                                        class="nav-link dropdown-toggle btn btn-outline-primary custom-dropdown-button"
+                                        class="nav-link dropdown-toggle btn btn-outline-primary custom-dropdown-button flex-row"
                                         href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                                        <img class="img-fluid rounded-circle me-2" width="38px" height="38px"
+                                            src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
+                                            alt="Profile Picture">{{ Auth::user()->name }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end rounded-2" aria-labelledby="navbarDropdown">
                                         <div class="d-flex align-items-center justify-content-center mb-2">
-                                            <a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id) }}">
-                                                <span class="material-symbols-outlined me-2"
-                                                    style="font-size:15px; font">account_circle</span>
+                                            <span class="material-symbols-outlined ms-4"
+                                                style="font-size:15px; font">account_circle</span>
+                                            <a class="dropdown-item  "
+                                                href="{{ route('user.profile', Auth::user()->id) }}">
+
                                                 Profile
                                             </a>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center mb-2">
+                                            <span style="font-size:15px; font"
+                                                class="material-symbols-outlined ms-4">logout</span>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                <span style="font-size:15px; font"
-                                                    class="material-symbols-outlined me-2">logout</span>
+
                                                 {{ __('Logout') }}
                                             </a>
                                         </div>
