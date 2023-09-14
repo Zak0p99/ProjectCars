@@ -15,7 +15,7 @@
             <div class="card " style="padding: 0px">
 
                 <div class="card-body"
-                    style="background-image: url({{ asset('sil.jpg') }}); background-size:cover; background-repeat:no-repeat;background-position:center center">
+                    style="background-image: url({{ asset('background.jpeg') }}); background-size:cover; background-repeat:no-repeat;background-position:center center">
 
                     <div class="row">
                         <!-- Left Column - Search Form Card -->
@@ -137,7 +137,7 @@
 
                         <!-- Right Column - Text -->
                         <div class="col-md-6 d-flex">
-                            <p class="mt-auto mb-auto" style="font-size: 20px; color: aliceblue">
+                            <p class="mt-auto mb-auto" style="font-size: 30px; color: aliceblue">
                                 Explore our wide selection of quality cars. Refine your search criteria on the left
                                 to
                                 find the perfect vehicle that meets your needs and budget.

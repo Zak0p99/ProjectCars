@@ -103,6 +103,15 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
+                            <li class="nav-item me-3">
+                                <!-- Add margin-left (ms-3) class to create horizontal spacing -->
+                                <a href="{{ route('cars.search') }}" class="btn custom-btn d-flex align-items-center">
+                                    <span class="material-symbols-outlined me-1">
+                                        search
+                                    </span>
+                                    Search for your dream car
+                                </a>
+                            </li>
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
