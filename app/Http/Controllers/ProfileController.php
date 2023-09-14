@@ -28,6 +28,7 @@ public function update(Request $request, $id)
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         'phone_number' => 'required|string|max:20',
+        'profile_picture' => 'required',
         // Add validation rules for other fields as needed
     ]);
 
@@ -35,8 +36,16 @@ public function update(Request $request, $id)
         'name' => $request->name,
         'email' => $request->email,
         'phone_number' => $request->phone_number,
+        
         // Update other fields here
     ]);
+    // Handle image upload if a new image is provided.
+    if ($request->hasFile('profile_picture')) {
+        // Store the uploaded file and get its path
+        $profilePicturePath = $request['profile_picture']->store('profile_pictures', 'public');
+        $user->update(['profile_picture' => $profilePicturePath]);
+        
+    }
 
     return redirect()->route('user.profile', ['user' => $user->id])->with('success', 'Profile updated successfully');
 }

@@ -7,16 +7,19 @@
                 <div class="card">
                     <div class="card-header">{{ __('Edit Profile') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('profile.update', $profile->id) }}">
+                        <form method="POST" action="{{ route('profile.update', $profile->id) }}"
+                            enctype="multipart/form-data">
+
+                            enctype="multipart/form-data >
                             @csrf
                             @method('PUT')
 
                             <!-- Name Input -->
                             <div class="form-group">
-                                <label for="name">{{ __('Name') }}</label>
-                                <input id="name" type="text" class="form-control" name="name"
-                                    value="{{ $profile->name }}" required>
-                            </div>
+                            <label for="name">{{ __('Name') }}</label>
+                            <input id="name" type="text" class="form-control" name="name"
+                                value="{{ $profile->name }}" required>
+
 
                             <!-- Email Input -->
                             <div class="form-group">
@@ -33,12 +36,18 @@
                             </div>
 
                             <!-- Add more fields as needed -->
+                            <div class="form-group">
+                                <label for="profile_picture">{{ __('Profile_Picture') }}</label>
+                                <input id="profile_picture" type="file" class="form-control" name="profile_picture">
 
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update Profile') }}
                                 </button>
                             </div>
+
+
                         </form>
                     </div>
                 </div>
