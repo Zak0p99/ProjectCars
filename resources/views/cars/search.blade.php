@@ -12,9 +12,8 @@
     </head>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
                 <div class="card"
-                    style="background-color: rgba(255, 255, 255, 0.5); border-left: 1px solid #000; border-right: 1px solid #000; margin-bottom: 20px;">
+                    style="padding: 0px;">
 
                     <div class="card-body"
                         style=" background:url({{ asset('/background.jpeg') }});background-repeat:no-repeat;background-size: cover;">
@@ -137,8 +136,8 @@
                             </div>
 
                             <!-- Right Column - Text -->
-                            <div class="col-md-6">
-                                <p style="font-size: 20px; color: aliceblue">
+                            <div class="col-md-6 d-flex">
+                                <p class="mt-auto mb-auto" style="font-size: 20px; color: aliceblue">
                                     Explore our wide selection of quality cars. Refine your search criteria on the left
                                     to
                                     find the perfect vehicle that meets your needs and budget.
@@ -148,6 +147,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 @endsection
