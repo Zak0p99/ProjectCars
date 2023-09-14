@@ -93,10 +93,12 @@
 
 
                             <label for="mileage">Mileage:</label>
-                            <input type="number" name="mileage" id="mileage" required>
+                            <input type="number" class="form-control" name="mileage" id="mileage" required>
 
-                            <label for="image">Image:</label>
-                            <input type="file" name="image" id="image" required>
+                            <div class="form-group">
+                                <label for="image">Image:</label>
+                                <input type="file" class="form-control" name="image" id="image" required>
+                            </div>
 
                             <label for="year">Select Car Year:</label>
                             <select class="form-select" id="year" name="year" class="form-control">
@@ -123,8 +125,7 @@
                                     <option value="{{ $city }}">{{ $city }}</option>
                                 @endforeach
                             </select>
-
-
+                            <br>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

@@ -15,6 +15,9 @@
                             <p>Name: {{ $profile->name }}</p>
                             <p>Joined The: {{ $profile->created_at }}</p>
                             <p>Phone Number: {{ $profile->phone_number }}</p>
+                            <img src="{{ asset('storage/app' . $profile->profile_picture) }}" alt="Profile Picture">
+                            <p>Profile Picture Path: {{ $profile->profile_picture }}</p>
+
 
                         </body>
 

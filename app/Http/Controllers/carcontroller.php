@@ -114,13 +114,13 @@ class CarController extends Controller
         $user = Auth::user();
         if($user->dealership){
             if(count($hmcars)>=10){
-                return redirect()->route('cars.create')->with('error', 'You can only have 10 cars listed at a time with normal account.');
+                return redirect()->route('cars.create')->with('error', 'You can only have 10 cars listed at a time with a dealership account rank 3 account.');
             }
             
         }
         else{
             if(count($hmcars)>=3){
-                return redirect()->route('cars.create')->with('error', 'You can only have 3 cars listed at a time with normal account.');
+                return redirect()->route('cars.create')->with('error', 'You can only have 3 cars listed at a time with a normal account.');
             }
         }
         

@@ -114,8 +114,11 @@
                             <div class="modal-content">
                                 <div class="modal-header" style="text-align: center;">
                                     <div style="text-align: center;">
-                                        <h5 class="modal-title" id="contactSellerModalLabel" style="display: inline-block;">
-                                            Contact Seller</h5>
+                                        <h5 class="modal-title text-center" id="contactSellerModalLabel"
+                                            style="display: inline-block; width: 100%;">
+                                            Contact Seller
+                                        </h5>
+
                                     </div>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
