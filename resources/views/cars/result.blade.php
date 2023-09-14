@@ -2,15 +2,6 @@
 
 @section('content')
 
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-    </head>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -75,19 +66,16 @@
                                 src="{{ asset($car->image) }}"></div>
                         <div class="col-md-6 mt-1">
                             <h2 style="color: black ; display:inline">{{ $car->carbrand }}</h2>
-                            <b>Modele</b>
-                            <h3 style="color: rgb(172, 179, 179) ; display:inline "> {{ $car->carmodel }}
+                            <b> - Modele :</b>
+                            <h3 style="color: rgb(0, 0, 0) ; display:inline ">{{ $car->carmodel }}
                             </h3>
-                            <div>
+                            <div class="info">
                                 <span><b>Year : </b>{{ $car->year }}</span>
-                                <br />
+
                                 <span><b>kilométrage : </b>{{ $car->mileage }}km</span>
                             </div>
-                            <div> <span><b>Fuel : </b>{{ $car->fuel }}</span>
-                                <br><span class="material-symbols-outlined">
-                                    location_on
-                                </span><b>City :
-                                </b>{{ $car->city }}</span>
+                            <div class="info"> <span><b>Fuel : </b>{{ $car->fuel }}</span>
+                                <span><b>City : </b>{{ $car->city }}</span>
                             </div>
                             <br />
                             <h5 class="mt-1 mb-1">Description :</h5>
@@ -99,8 +87,10 @@
                                 <h4 class="mr-1">{{ $car->price }} Dhs</h4>
                             </div>
 
-                            <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button"
-                                    style="height: 3.5rem ; font-size:20px ; font-weight:bold">Details</button>
+                            <div class="d-flex flex-column mt-4"> <a class="btn btn-primary btn-sm"
+                                    href="{{ route('car.details', ['id' => $car->id]) }}">
+                                    Details
+                                </a>
                                 <a class="btn btn-outline-primary btn-sm mt-2" href="#" data-toggle="modal"
                                     data-target="#contactSellerModal_{{ $car->id }}">
                                     Contact Seller

@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <head>
+        <style>
+            .custom-card {
+                margin: 10px;
+                /* Adjust the margin as needed */
+            }
+        </style>
+    </head>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -21,7 +30,8 @@
                                         <script src="{{ asset('js/car-dropdown.js') }}"></script>
                                         @if ($errors->any())
                                             <div class="alert alert-danger">
-                                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                                <strong>Whoops!</strong> There were some problems with your
+                                                input.<br><br>
                                                 <ul>
                                                     @foreach ($errors->all() as $error)
                                                         <li>{{ $error }}</li>
@@ -100,7 +110,8 @@
                                                 <select id="fuel" name="fuel" class="form-control">
                                                     <option value="">Select fuel type</option>
                                                     @foreach ($fuelOptions as $fuel)
-                                                        <option value="{{ $fuel }}">{{ $fuel }}</option>
+                                                        <option value="{{ $fuel }}">{{ $fuel }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -111,7 +122,8 @@
                                                 <select id="maxMileage" name="maxMileage" class="form-control">
                                                     <option value="">Any</option>
                                                     @for ($mileage = 10000; $mileage <= 110000; $mileage += 10000)
-                                                        <option value="{{ $mileage }}">{{ number_format($mileage) }}
+                                                        <option value="{{ $mileage }}">
+                                                            {{ number_format($mileage) }}
                                                         </option>
                                                     @endfor
                                                 </select>
@@ -127,7 +139,8 @@
                             <!-- Right Column - Text -->
                             <div class="col-md-6">
                                 <p style="font-size: 20px; color: aliceblue">
-                                    Explore our wide selection of quality cars. Refine your search criteria on the left to
+                                    Explore our wide selection of quality cars. Refine your search criteria on the left
+                                    to
                                     find the perfect vehicle that meets your needs and budget.
                                 </p>
                             </div>

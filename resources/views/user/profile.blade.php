@@ -36,15 +36,16 @@
                                 src="{{ asset($car->image) }}"></div>
                         <div class="col-md-6 mt-1">
                             <h2 style="color: black ; display:inline">{{ $car->carbrand }}</h2>
-                            <h3 style="color: rgb(172, 179, 179) ; display:inline ">{{ $car->carmodel }}
+                            <b> - Modele :</b>
+                            <h3 style="color: rgb(0, 0, 0) ; display:inline ">{{ $car->carmodel }}
                             </h3>
-                            <div>
+                            <div class="info">
                                 <span><b>Year : </b>{{ $car->year }}</span>
-                                <br />
+
                                 <span><b>kilométrage : </b>{{ $car->mileage }}km</span>
                             </div>
-                            <div> <span><b>Fuel : </b>{{ $car->fuel }}</span>
-                                <br><span><b>City : </b>{{ $car->city }}</span>
+                            <div class="info"> <span><b>Fuel : </b>{{ $car->fuel }}</span>
+                                <span><b>City : </b>{{ $car->city }}</span>
                             </div>
                             <br />
                             <h5 class="mt-1 mb-1">Description :</h5>
@@ -58,7 +59,33 @@
 
                             <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button"
                                     style="height: 3.5rem ; font-size:20px ; font-weight:bold">Details</button>
-                                <button class="btn btn-outline-primary btn-sm mt-2" type="button">Contact Seller</button>
+                                <button class="btn btn-outline-primary btn-sm mt-2 contact-seller-btn" data-toggle="modal"
+                                    data-target="#contactSellerModal_{{ $car->id }}">
+                                    Contact Seller
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="contactSellerModal_{{ $car->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="contactSellerModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="contactSellerModalLabel">Contact Seller</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><b>Name: </b>{{ $car->user->name }}</p>
+                                    <p><b>Email: </b>{{ $car->user->email }}</p>
+                                    <p><b>Phone Number: </b>{{ $car->user->phonenumber }}</p>
+                                    <p><a href="{{ route('user.profile', $car->user->id) }}">View Profile</a></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <!-- You can add more buttons or actions here if needed -->
+                                </div>
                             </div>
                         </div>
                     </div>

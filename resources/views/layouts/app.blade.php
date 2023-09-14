@@ -22,10 +22,30 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
+        .custom-card-body {
+            max-width: 800px;
+            /* Adjust the width as needed */
+            margin: 0 auto;
+            /* Center the content horizontally */
+            padding: 20px;
+            /* Add padding for spacing */
+        }
+
         .custom-btn {
             background-color: red;
             color: white;
+        }
+
+        .info span {
+            margin-right: 20px;
+            /* Adjust the value to control the amount of space between spans */
         }
 
         .custom-dropdown-menu {

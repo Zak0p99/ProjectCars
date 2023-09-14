@@ -175,7 +175,16 @@ class CarController extends Controller
     {
         //
     }
+    public function showDetails($id)
+{
+    $car = Car::find($id);
+    if (!$car) {
+        // Handle the case where the car with the given ID is not found
+        abort(404);
+    }
 
+    return view('cars.car_details', ['car' => $car]);
+}   
     /**
      * Show the form for editing the specified resource.
      */

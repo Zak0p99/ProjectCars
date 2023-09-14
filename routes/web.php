@@ -24,6 +24,9 @@ Route::get('/', function () {
 Route::get('/cars/search',[CarController::class,'search'])->name('cars.search');
 
 
+Route::get('/car/details/{id}', [CarController::class, 'showDetails'])->name('car.details');
+
+
 
 Route::get('/cars/searchresult',[CarController::class,'searchresult'])->name('cars.searchresult');
 
