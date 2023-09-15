@@ -9,9 +9,20 @@ class ProfileController extends Controller
 {
     public function show(int $user)
     {
+        
+        $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
+        $cities = json_decode(file_get_contents(public_path('city_names.json')));
+        // Define an array of fuel options
+        $fuelOptions = [
+            'Gasoline',
+            'Diesel',
+            'Electric',
+            'Hybrid',
+            'Other',
+        ];  
         $cars = Car::where('user_id', $user)->get();
         $profile= User::find($user);
-        return view('user.profile', compact('profile','cars'));
+        return view('user.profile', compact('profile','cars','brandsWithModels', 'fuelOptions','cities'));
     }
     public function edit($id)
 {

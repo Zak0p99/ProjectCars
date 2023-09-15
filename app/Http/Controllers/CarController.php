@@ -188,17 +188,74 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(car $car)
+    public function edit($id)
     {
-        //
+        $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
+        $cities = json_decode(file_get_contents(public_path('city_names.json')));
+        // Define an array of fuel options
+        $fuelOptions = [
+            'Gasoline',
+            'Diesel',
+            'Electric',
+            'Hybrid',
+            'Other',
+        ];  
+        $car = Car::findOrFail($id); // Fetch the car data
+
+        // Load any additional data you want to pass to the view here
+
+        return view('cars.edit_car', compact('car','brandsWithModels', 'fuelOptions','cities'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, car $car)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'carBrand' => 'required',
+            'carModel' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'image' => 'required|image', // Adjust file types and size as needed
+            'mileage' => 'required|numeric',
+            'fuel' => 'required',
+            'year' => 'required|numeric',
+            'city' => 'required',
+        ]);
+        // Upload and store the image
+        
+        
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+        $image->move(public_path('storage'), $imageName);
+
+        $imagePath = 'storage/' . $imageName;
+
+
+
+        // Find the car by its ID
+        $car = Car::findOrFail($id);
+
+        // Update the car details based on the form data
+        $car->carBrand = $validatedData['carBrand'];
+        $car->carModel = $validatedData['carModel'];
+        $car->price = $validatedData['price'];
+        $car->description = $validatedData['description'];
+        $car->image = $imagePath; // Save the image path
+        $car->mileage = $validatedData['mileage'];
+        $car->fuel = $validatedData['fuel'];
+        $car->year = $validatedData['year'];
+        $car->city = $validatedData['city'];
+       
+
+        // Save the changes
+        $car->save();
+
+        // Redirect back to the car details page or a listing page
+        return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car listing updated successfully');
+
     }
 
     /**
