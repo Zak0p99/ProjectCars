@@ -4,38 +4,35 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card flex-row  align-items-center">
-
-                    <img class="card-img-left w-25 h-25 rounded-circle p-2"
-                        src="{{ asset('storage/' . $profile->profile_picture) }}" alt="Profile Picture">
-
+                <div class="card text-center">
                     <div class="card-body">
 
+                        <img class="card-img-top w-25 h-25 rounded-circle mx-auto p-2"
+                            src="{{ asset('storage/' . $profile->profile_picture) }}" alt="Profile Picture">
 
-                        <h1>User Profile</h1>
+                        <h1 class="card-title">User Profile</h1>
                         <p>Email: {{ $profile->email }}</p>
                         <p>Name: {{ $profile->name }}</p>
                         <p>Joined The: {{ $profile->created_at }}</p>
                         <p>Phone Number: {{ $profile->phone_number }}</p>
 
-                        @if ($profile->id == Auth::user()->id)
-                            <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-primary">Edit Profile</a>
-                        @endif
-
-
-
-
+                        @Auth
+                            @if ($profile->id == Auth::user()->id)
+                                <a href="{{ route('profile.edit', $profile->id) }}" class="btn btn-primary">Edit Profile</a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 @foreach ($cars as $car)
-                    <div class="row p-2 bg-white border rounded">
+                    <div class="row p-2 bg-white border rounded mb-2">
 
                         @if (Session::has('success'))
                             <div class="alert alert-success">
@@ -74,22 +71,26 @@
                                 <h4 class="mr-1">{{ $car->price }} Dhs</h4>
                             </div>
 
-                            <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button"
-                                    style="height: 3.5rem ; font-size:20px ; font-weight:bold">Details</button>
+                            <div class="d-flex flex-column mt-4"><a class="btn btn-primary btn-sm"
+                                    href="{{ route('car.details', ['id' => $car->id]) }}">
+                                    Details
+                                </a>
                                 <button class="btn btn-outline-primary btn-sm mt-2 contact-seller-btn" data-toggle="modal"
                                     data-target="#contactSellerModal_{{ $car->id }}">
                                     Contact Seller
                                 </button>
                             </div>
                         </div>
-                        @if ($car->user_id == Auth::user()->id)
-                            <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Edit</a>
-                            </form>
-                        @endif
+                        @Auth
+                            @if ($car->user_id == Auth::user()->id)
+                                <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Edit</a>
+                                </form>
+                            @endif
+                        @endauth
                     </div>
                     <div class="modal fade" id="contactSellerModal_{{ $car->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="contactSellerModalLabel" aria-hidden="true">

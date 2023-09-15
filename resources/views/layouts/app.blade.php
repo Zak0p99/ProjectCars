@@ -82,8 +82,7 @@
                 <div class="d-flex  justify-content-center align-items-center">
                     <a class="navbar-brand"
                         style="font-weight: bold ; font-size:25px ; left:-100px ; position:relative ;"
-                        href="{{ url('/cars/search') }}"><img src="{{ asset('/logo.png') }}" alt="logo"
-                            height="35">
+                        href="{{ url('/cars/search') }}">
                         Car Marketplace
                     </a>
                 </div>
@@ -135,13 +134,23 @@
                                         Search for cars
                                     </a>
                                 </li>
+                                <!-- Second list item with horizontal spacing added -->
+                                <li class="nav-item ms-1">
+                                    <!-- Add margin-left (ms-3) class to create horizontal spacing -->
+                                    <a href="{{ route('cars.create') }}" class="btn custom-btn d-flex align-items-center">
+                                        <span class="material-symbols-outlined me-2">
+                                            library_add
+                                        </span>
+                                        Create Car
+                                    </a>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <!-- Use Bootstrap classes to style the clickable dropdown button -->
                                     <a id="navbarDropdown"
-                                        class="nav-link dropdown-toggle btn btn-outline-primary custom-dropdown-button flex-row"
+                                        class="nav-link dropdown-toggle btn btn-outline-primary custom-dropdown-button flex-row ms-4"
                                         href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" v-pre>
-                                        <img class="img-fluid rounded-circle me-2" width="38px" height="38px"
+                                        <img class="img-fluid rounded-circle me-2" width="30px" height="38px"
                                             src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
                                             alt="Profile Picture">{{ Auth::user()->name }}
                                     </a>
@@ -169,16 +178,7 @@
 
                                 </li>
 
-                                <!-- Second list item with horizontal spacing added -->
-                                <li class="nav-item ms-3">
-                                    <!-- Add margin-left (ms-3) class to create horizontal spacing -->
-                                    <a href="{{ route('cars.create') }}" class="btn custom-btn d-flex align-items-center">
-                                        <span class="material-symbols-outlined me-2">
-                                            library_add
-                                        </span>
-                                        Create Car
-                                    </a>
-                                </li>
+
                             </ul>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -198,5 +198,6 @@
     </main>
     </div>
 </body>
+
 
 </html>
