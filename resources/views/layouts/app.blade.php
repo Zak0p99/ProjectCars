@@ -109,7 +109,7 @@
                                     <span class="material-symbols-outlined me-1">
                                         search
                                     </span>
-                                    Search for your dream car
+                                    Search for cars
                                 </a>
                             </li>
                             @if (Route::has('login'))
@@ -132,7 +132,7 @@
                                         <span class="material-symbols-outlined me-1">
                                             search
                                         </span>
-                                        Search for your dream car
+                                        Search for cars
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">

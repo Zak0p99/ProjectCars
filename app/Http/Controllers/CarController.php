@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 //use App\Models\Car as CarModel; // Import your Car model 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Session;
 
 class CarController extends Controller
 {
@@ -204,8 +204,23 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(car $car)
+    public function destroy($id)
     {
-        //
+        $car = Car::findOrFail($id);
+
+        // Check if the currently authenticated user owns the car listing
+        if (Auth::user()->id == $car->user_id) {
+            // Delete the car listing
+            $car->delete();
+
+            // Add a success message
+            Session::flash('success', 'Car listing deleted successfully.');
+
+            return redirect()->back(); // Redirect back to the user's profile page or a listing page.
+        } else {
+            // If the user doesn't own the listing, add an error message
+            Session::flash('error', 'You do not have permission to delete this car listing.');
+            return redirect()->back();
+        }
     }
 }

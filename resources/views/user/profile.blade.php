@@ -8,6 +8,7 @@
 
                     <img class="card-img-left w-25 h-25 rounded-circle p-2"
                         src="{{ asset('storage/' . $profile->profile_picture) }}" alt="Profile Picture">
+
                     <div class="card-body">
 
 
@@ -35,6 +36,19 @@
             <div class="col-md-10">
                 @foreach ($cars as $car)
                     <div class="row p-2 bg-white border rounded">
+
+                        @if (Session::has('success'))
+                            <div class="alert alert-success">
+                                {{ Session::get('success') }}
+                            </div>
+                        @endif
+
+                        @if (Session::has('error'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('error') }}
+                            </div>
+                        @endif
+
                         <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
                                 src="{{ asset($car->image) }}"></div>
                         <div class="col-md-6 mt-1">
@@ -68,6 +82,13 @@
                                 </button>
                             </div>
                         </div>
+                        @if ($car->user_id == Auth::user()->id)
+                            <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        @endif
                     </div>
                     <div class="modal fade" id="contactSellerModal_{{ $car->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="contactSellerModalLabel" aria-hidden="true">
