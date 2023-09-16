@@ -147,6 +147,41 @@
 
                 </div>
             </div>
+            <div class="card mt-5">
+                <div class="card-body">
+                    <p>
+                        Ne cherchez plus votre prochaine voiture. Visitez carmarketplace.com.
+
+                        Bienvenue sur carmarketplace.com. Vous y trouverez chaque jour plus de 1,4 million de véhicules en
+                        provenance
+
+                        de toute l’Europe et 30 000 du Maroc. Voitures neuves et d’occasion, petites cylindrées, voitures de
+                        collection, limousines de luxe ou bonnes affaires : quel que soit le type de véhicule recherché,
+                        vous le
+                        trouverez sur carmarketplace.com.
+                        carmarketplace.com est le plus grand portail automobile allemand qui facilite l’achat
+                        d’un véhicule. Par une simple recherche et en quelques clics, vous pourrez obtenir un aperçu de
+                        l’ensemble du marché automobile. Vous pourrez facilement comparer et prendre une décision, mais
+                        aussi
+                        contacter des vendeurs de voitures neuves et d’occasion, gratuitement, aisément et sans soucis.
+                        Vous souhaitez acheter une voiture d’occasion Sur carmarketplace.com, vous trouverez des offres de
+                        professionnels et de particuliers adaptées à vos besoins.
+                        Elles peuvent même être assorties d’une garantie véhicule d’occasion, si nécessaire.
+                        Ou peut-être recherchez-vous une voiture neuve ? Alors, vous êtes au bon endroit. Des véhicules
+                        flambant
+                        neufs, des voitures CE neuves, des voitures avec immatriculations pour une journée et des voitures
+                        de société parfaitement entretenues . Le tout clairement détaillé et offrant un vaste choix.
+                        En d’autres termes, sur carmarketplace.com, vous trouverez facilement le véhicule adapté à votre
+                        mode de
+                        vie. carmarketplace.com - Quel sera votre prochain véhicule?
+                    </p>
+                </div>
+            </div>
         </div>
-    </div>
-@endsection
+        <footer class="footer mt-5">
+            <div class="container text-center">
+                <p>© 2023 CarMarketPlace, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+            </div>
+        </footer>
+
+    @endsection

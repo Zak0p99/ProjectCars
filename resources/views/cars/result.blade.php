@@ -24,7 +24,7 @@
             <div class="col-md-10">
                 @foreach ($cars as $car)
                     <div class="row p-2 bg-white border rounded mb-2">
-                        <div class="col-md-3 mt-1">
+                        <div class="col-md-3 mt-4">
                             @if ($car->images->count() > 0)
                                 <!-- Display the first image as a thumbnail with a maximum height -->
                                 <img class="img-fluid img-responsive rounded product-image"
@@ -75,8 +75,7 @@
                             <div class="modal-content">
                                 <div class="modal-header" style="text-align: center;">
                                     <div style="text-align: center;">
-                                        <h5 class="modal-title text-center" id="contactSellerModalLabel"
-                                            style="display: inline-block; width: 100%;">
+                                        <h5 id="contactSellerModalLabel" style="display: inline-block; width: 100%">
                                             Contact Seller
                                         </h5>
 
@@ -86,18 +85,28 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- Add your contact form or content here -->
+                                    <div class="card-body">
+                                        <h2 style="color: red; text-align:center ">Attention !</h2>
+                                        <p style="font-size: 15px">You should never send money in advance to the seller by
+                                            bank
+                                            transfer or through
+                                            a
+                                            money transfer agency when purchasing goods available on the site.</p>
+                                    </div>
+
+                                    <hr>
                                     <b>Name: </b>{{ $car->user->name }}<br>
                                     <b>Email: </b>{{ $car->user->email }}<br>
 
                                     <b>Phone Number: </b>{{ $car->user->phone_number }}
                                     <br>
                                     <a href="{{ route('user.profile', $car->user->id) }}">View Profile</a>
-                                    <!-- You can use Laravel Blade directives to include a form or any other content -->
+
                                 </div>
                                 <div class="modal-footer">
+
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <!-- Add additional buttons if needed -->
+
                                 </div>
                             </div>
                         </div>

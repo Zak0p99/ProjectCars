@@ -46,7 +46,7 @@
                             </div>
                         @endif
 
-                        <div class="col-md-3 mt-1">
+                        <div class="col-md-3 mt-5">
                             @if ($car->images->count() > 0)
                                 <!-- Display the first image as a thumbnail with a maximum height -->
                                 <img class="img-fluid img-responsive rounded product-image"
@@ -77,7 +77,7 @@
                         </div>
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">{{ $car->price }} Dhs</h4>
+                                <h4 class="mr-1">{{ number_format($car->price, 0, ',', ',') }} Dhs</h4>
                             </div>
 
                             <div class="d-flex flex-column mt-4"><a class="btn btn-primary btn-sm"
@@ -117,6 +117,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="card-body">
+                                        <h2 style="color: red; text-align:center ">Attention !</h2>
+                                        <p style="font-size: 15px">You should never send money in advance to the seller by
+                                            bank
+                                            transfer or through
+                                            a
+                                            money transfer agency when purchasing goods available on the site.</p>
+                                    </div>
+                                    <hr>
                                     <p><b>Name: </b>{{ $car->user->name }}</p>
                                     <p><b>Email: </b>{{ $car->user->email }}</p>
                                     <p><b>Phone Number: </b>{{ $car->user->phone_number }}</p>
