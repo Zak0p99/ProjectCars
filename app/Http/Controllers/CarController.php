@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Storage;
+use App\Models\CarImage;
 class CarController extends Controller
 {
     /**
@@ -132,22 +133,14 @@ class CarController extends Controller
             'carModel' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
-            'image' => 'required|image', // Adjust file types and size as needed
+            'images.*' => 'required|image', // Use 'images.*' to validate multiple images
             'mileage' => 'required|numeric',
             'fuel' => 'required',
             'year' => 'required|numeric',
             'city' => 'required',
         ]);
 
-        // Upload and store the image
         
-        
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-    
-            $image->move(public_path('storage'), $imageName);
-    
-            $imagePath = 'storage/' . $imageName;
 
         // Create a new Car model instance and fill it with the validated data
         $car = new Car();
@@ -155,17 +148,29 @@ class CarController extends Controller
         $car->carModel = $validatedData['carModel'];
         $car->price = $validatedData['price'];
         $car->description = $validatedData['description'];
-        $car->image = $imagePath; // Save the image path
+       
         $car->mileage = $validatedData['mileage'];
         $car->fuel = $validatedData['fuel'];
-        $car->year = $validatedData['year'];
+        $car->year = $validatedData['year'];    
         $car->city = $validatedData['city'];
         $car->user_id = Auth::id();
         // Save the car record to the database
         $car->save();
 
-        return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car created successfully');
+        foreach ($request->file('images') as $image) {
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/car_images', $imageName);
+        
+            // Create a new car image record
+            $carImage = new CarImage();
+            $carImage->image_path = 'storage/car_images/' . $imageName;
+        
+            // Associate the image with the car
+            $carImage->car_id = $car->id; // Assuming you have a 'car_id' column in the 'car_images' table
+            $carImage->save();
+        }
 
+        return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car created successfully');
     }
 
     /**
@@ -211,73 +216,99 @@ class CarController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'carBrand' => 'required',
-            'carModel' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'required',
-            'image' => 'required|image', // Adjust file types and size as needed
-            'mileage' => 'required|numeric',
-            'fuel' => 'required',
-            'year' => 'required|numeric',
-            'city' => 'required',
-        ]);
-        // Upload and store the image
-        
-        
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
+{
+    $validatedData = $request->validate([
+        'carBrand' => 'required',
+        'carModel' => 'required',
+        'price' => 'required|numeric',
+        'description' => 'required',
+        'images.*' => 'image', // Allow updating images, but not required
+        'mileage' => 'required|numeric',
+        'fuel' => 'required',
+        'year' => 'required|numeric',
+        'city' => 'required',
+    ]);
 
-        $image->move(public_path('storage'), $imageName);
+    // Find the car by its ID
+    $car = Car::findOrFail($id);
 
-        $imagePath = 'storage/' . $imageName;
+    // Update the car details based on the form data
+    $car->carBrand = $validatedData['carBrand'];
+    $car->carModel = $validatedData['carModel'];
+    $car->price = $validatedData['price'];
+    $car->description = $validatedData['description'];
+    $car->mileage = $validatedData['mileage'];
+    $car->fuel = $validatedData['fuel'];
+    $car->year = $validatedData['year'];
+    $car->city = $validatedData['city'];
 
+    // Check if new images were uploaded
+    if ($request->hasFile('images')) {
+        // Delete the existing car images
+        foreach ($car->images as $image) {
+            // Delete the image file from storage (if needed)
+            if (Storage::exists($image->image_path)) {
+                Storage::delete($image->image_path);
+            }
 
+            // Delete the image record from the database
+            $image->delete();
+        }
 
-        // Find the car by its ID
-        $car = Car::findOrFail($id);
+        // Upload and store the new images
+        foreach ($request->file('images') as $image) {
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/car_images', $imageName);
 
-        // Update the car details based on the form data
-        $car->carBrand = $validatedData['carBrand'];
-        $car->carModel = $validatedData['carModel'];
-        $car->price = $validatedData['price'];
-        $car->description = $validatedData['description'];
-        $car->image = $imagePath; // Save the image path
-        $car->mileage = $validatedData['mileage'];
-        $car->fuel = $validatedData['fuel'];
-        $car->year = $validatedData['year'];
-        $car->city = $validatedData['city'];
-       
+            // Create a new car image record
+            $carImage = new CarImage();
+            $carImage->image_path = 'storage/car_images/' . $imageName;
 
-        // Save the changes
-        $car->save();
-
-        // Redirect back to the car details page or a listing page
-        return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car listing updated successfully');
-
+            // Associate the image with the car
+            $car->images()->save($carImage);
+        }
     }
+
+    // Save the changes
+    $car->save();
+
+    // Redirect back to the car details page or a listing page
+    return redirect()->route('user.profile', Auth::user()->id)->with('success', 'Car listing updated successfully');
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
-        $car = Car::findOrFail($id);
+{
+    $car = Car::findOrFail($id);
 
-        // Check if the currently authenticated user owns the car listing
-        if (Auth::user()->id == $car->user_id) {
-            // Delete the car listing
-            $car->delete();
+    // Check if the currently authenticated user owns the car listing
+    if (Auth::user()->id == $car->user_id) {
+        // Delete the associated car images
+        foreach ($car->images as $image) {
+            // Delete the image file from storage (if needed)
+            if (Storage::exists($image->image_path)) {
+                Storage::delete($image->image_path);
+            }
 
-            // Add a success message
-            Session::flash('success', 'Car listing deleted successfully.');
-
-            return redirect()->back(); // Redirect back to the user's profile page or a listing page.
-        } else {
-            // If the user doesn't own the listing, add an error message
-            Session::flash('error', 'You do not have permission to delete this car listing.');
-            return redirect()->back();
+            // Delete the image record from the database
+            $image->delete();
         }
+
+        // Delete the car listing
+        $car->delete();
+
+        // Add a success message
+        Session::flash('success', 'Car listing and associated images deleted successfully.');
+
+        return redirect()->back(); // Redirect back to the user's profile page or a listing page.
+    } else {
+        // If the user doesn't own the listing, add an error message
+        Session::flash('error', 'You do not have permission to delete this car listing.');
+        return redirect()->back();
     }
+}
+
 }

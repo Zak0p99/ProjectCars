@@ -17,37 +17,37 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});  // Define the route for the welcome page.
 
-Route::put('/profile/{id}', [ProfileController::class,'update'])->name('profile.update');
-
-
-Route::get('/cars/search',[CarController::class,'search'])->name('cars.search');
+Route::put('/profile/{id}', [ProfileController::class,'update'])->name('profile.update'); // Define the route for updating a profile.
 
 
-Route::get('/car/details/{id}', [CarController::class, 'showDetails'])->name('car.details');
-
-Route::delete('/cars/{id}', [CarController::class,'destroy'])->name('cars.destroy');
+Route::get('/cars/search',[CarController::class,'search'])->name('cars.search'); // Define the route for searching cars.
 
 
-Route::put('/cars/{id}', [CarController::class, 'update'])->name('cars.update');
+Route::get('/car/details/{id}', [CarController::class, 'showDetails'])->name('car.details'); // Define the route for displaying a car's details.
+ 
+Route::delete('/cars/{id}', [CarController::class,'destroy'])->name('cars.destroy'); // Define the route for deleting a car.
+
+
+Route::put('/cars/{id}', [CarController::class, 'update'])->name('cars.update'); // Define the route for updating a car.
 
 
 Route::get('/cars/searchresult',[CarController::class,'searchresult'])->name('cars.searchresult');
 
 Route::post('/cars', [CarController::class, 'store'])->name('cars.store'); // Define the route for storing a car.
 
-Route::get('/display', [DisplayController::class, 'index'])->name('cars.display');
+Route::get('/display', [DisplayController::class, 'index'])->name('cars.display'); // Define the route for displaying all cars.
 
 
-Route::get('cars/create', 'CarController@create')->middleware('auth');
+Route::get('cars/create', 'CarController@create')->middleware('auth'); // Define the route for creating a car.
 
 Route::resource('cars', CarController::class); // Define the resource route for cars.
 
 Route::resource('profile', ProfileController::class); // Define the resource route for profiles.
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile/{user}', 'ProfileController@show')->name('user.profile');
+    Route::get('/profile/{user}', 'ProfileController@show')->name('user.profile');  // Define the route for displaying a user's profile.
 }); // Define the route for displaying a user's profile.
 
 

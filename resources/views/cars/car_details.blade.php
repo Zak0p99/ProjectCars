@@ -2,19 +2,48 @@
 
 @section('content')
     <div class="container">
+
         <div class="row justify-content-center">
+
             <div class="col-md-8">
+
                 <div class="card">
+
                     <div class="card-header text-center font-weight-bold h2">
-                        Listing of {{ $car->carbrand }} - Modele : {{ $car->carmodel }} by {{ $car->user->name }}
+
+                        Listing of {{ $car->carbrand }} - Model: {{ $car->carmodel }} by {{ $car->user->name }}
+
                     </div>
 
-
                     <div class="card-body">
+
                         <!-- Display car details here -->
-                        <div class="text-center">
-                            <img src="{{ asset($car->image) }}" alt="Car Image" width="700">
+
+                        <div id="carCarousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                @foreach ($car->images as $key => $image)
+                                    <li data-target="#carCarousel" data-slide-to="{{ $key }}"
+                                        class="{{ $key === 0 ? 'active' : '' }}"></li>
+                                @endforeach
+                            </ol>
+                            <div class="carousel-inner">
+                                @foreach ($car->images as $key => $image)
+                                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                                        <img class="d-block w-100 car-image" src="{{ asset($image->image_path) }}"
+                                            alt="{{ $car->carModel }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <a class="carousel-control-prev" href="#carCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+
                         <div class="mt-3">
                             <div class="row">
                                 <div class="col-md-3">
@@ -55,10 +84,23 @@
                             </div>
                         </div>
 
-
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+    <style>
+        /* Custom CSS to control image dimensions in the carousel */
+        .car-image {
+            max-height: 300px;
+            min-height: 300px;
+            /* Set the maximum height of the images */
+            width: auto;
+            /* Allow the width to adjust automatically */
+        }
+    </style>
 @endsection

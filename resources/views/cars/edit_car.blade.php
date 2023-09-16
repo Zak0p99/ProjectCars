@@ -95,8 +95,8 @@
                             <input type="number" class="form-control" name="mileage" id="mileage" required>
 
                             <div class="form-group">
-                                <label for="image">Image:</label>
-                                <input type="file" class="form-control" name="image" id="image" required>
+                                <label for="images">Images:</label>
+                                <input type="file" class="form-control" name="images[]" id="images" multiple>
                             </div>
 
                             <label for="year">Select Car Year:</label>
