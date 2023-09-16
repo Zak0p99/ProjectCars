@@ -6,8 +6,9 @@
         <div class="row justify-content-center">
 
             <div class="col-md-8">
-
+                <button class="btn btn-primary mb-3" onclick="goBack()">Back</button>
                 <div class="card">
+
 
                     <div class="card-header text-center font-weight-bold h2">
 
@@ -63,9 +64,7 @@
                                 <div class="col-md-3">
                                     <strong>Mileage:</strong> {{ $car->mileage }} km
                                 </div>
-                                <div class="col-md-3">
-                                    <strong>Description:</strong> {{ $car->description }}
-                                </div>
+
                                 <div class="col-md-3">
                                     <strong>City:</strong> {{ $car->city }}
                                 </div>
@@ -82,6 +81,12 @@
                                         href="{{ route('user.profile', $car->user->id) }}">{{ $car->user->name }}</a>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong>Description:</strong> {{ $car->description }}
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -91,16 +96,19 @@
             </div>
 
         </div>
-
-    </div>
-    <style>
-        /* Custom CSS to control image dimensions in the carousel */
-        .car-image {
-            max-height: 300px;
-            min-height: 300px;
-            /* Set the maximum height of the images */
-            width: auto;
-            /* Allow the width to adjust automatically */
-        }
-    </style>
-@endsection
+        <style>
+            /* Custom CSS to control image dimensions in the carousel */
+            .car-image {
+                max-height: 300px;
+                min-height: 300px;
+                /* Set the maximum height of the images */
+                width: auto;
+                /* Allow the width to adjust automatically */
+            }
+        </style>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    @endsection
