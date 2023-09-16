@@ -96,8 +96,8 @@
                                     <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm mr-3 mb-5">Delete</button>
-                                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary mr-3 mb-5">Edit</a>
+                                        <button type="submit" class="btn btn-danger btn-sm mr-3 mb-1">Delete</button>
+                                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary mr-3 mb-1">Edit</a>
                                     </form>
                                 @endif
                             @endauth

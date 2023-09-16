@@ -24,8 +24,17 @@
             <div class="col-md-10">
                 @foreach ($cars as $car)
                     <div class="row p-2 bg-white border rounded mb-2">
-                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                src="{{ asset($car->image) }}"></div>
+                        <div class="col-md-3 mt-1">
+                            @if ($car->images->count() > 0)
+                                <!-- Display the first image as a thumbnail with a maximum height -->
+                                <img class="img-fluid img-responsive rounded product-image"
+                                    src="{{ asset($car->images[0]->image_path) }}" style="max-height: 200px; width: 200px;">
+                            @else
+                                <!-- Display a default image or message if no images are available -->
+                                <img class="img-fluid img-responsive rounded product-image"
+                                    src="{{ asset('path_to_default_image.jpg') }}" alt="No Image">
+                            @endif
+                        </div>
                         <div class="col-md-6 mt-1">
                             <h2 style="color: black ; display:inline">{{ $car->carbrand }}</h2>
                             <b> - Modele :</b>
