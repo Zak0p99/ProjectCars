@@ -54,7 +54,7 @@
                                     <strong>Model:</strong> {{ $car->carmodel }}
                                 </div>
                                 <div class="col-md-3">
-                                    <strong>Price:</strong> {{ $car->price }} Dhs
+                                    <strong>Price:</strong> {{ number_format($car->price, 0, ',', ',') }} Dhs
                                 </div>
                                 <div class="col-md-3">
                                     <strong>Year:</strong> {{ $car->year }}

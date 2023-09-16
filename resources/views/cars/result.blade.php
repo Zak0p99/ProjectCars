@@ -43,7 +43,7 @@
                             <div class="info">
                                 <span><b>Year : </b>{{ $car->year }}</span>
 
-                                <span><b>kilométrage : </b>{{ $car->mileage }}km</span>
+                                <span><b>kilométrage : </b>{{ number_format($car->mileage, 0, ',', ',') }}km</span>
                             </div>
                             <div class="info"> <span><b>Fuel : </b>{{ $car->fuel }}</span>
                                 <span><b>City : </b>{{ $car->city }}</span>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">{{ $car->price }} Dhs</h4>
+                                <h4 class="mr-1">{{ number_format($car->price, 0, ',', ',') }} Dhs</h4>
                             </div>
 
                             <div class="d-flex flex-column mt-4"> <a class="btn btn-primary btn-sm"
