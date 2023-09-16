@@ -16,21 +16,9 @@ class CarController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
-        $cities = json_decode(file_get_contents(public_path('city_names.json')));
-        // Define an array of fuel options
-        $fuelOptions = [
-            'Gasoline',
-            'Diesel',
-            'Electric',
-            'Hybrid',
-            'Other',
-        ];  
-            return view('cars.search', compact('brandsWithModels', 'fuelOptions','cities'));
-    }
-
-    public function search(){
+{
+    
+    $recentCars = Car::orderBy('created_at', 'desc')->take(3)->get();
     
     $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
     $cities = json_decode(file_get_contents(public_path('city_names.json')));
@@ -42,7 +30,24 @@ class CarController extends Controller
         'Hybrid',
         'Other',
     ];  
-        return view('cars.search', compact('brandsWithModels', 'fuelOptions','cities'));
+    return view('cars.search', compact('brandsWithModels', 'fuelOptions', 'cities', 'recentCars'));
+}
+
+
+
+    public function search(){
+    $recentCars = Car::orderBy('created_at', 'desc')->take(3)->get();
+    $brandsWithModels = json_decode(file_get_contents(public_path('brands_with_models.json')), true);
+    $cities = json_decode(file_get_contents(public_path('city_names.json')));
+    // Define an array of fuel options
+    $fuelOptions = [
+        'Gasoline',
+        'Diesel',
+        'Electric',
+        'Hybrid',
+        'Other',
+    ];  
+        return view('cars.search', compact('brandsWithModels', 'fuelOptions','cities', 'recentCars'));
     }
     public function searchresult(Request $request)
 {

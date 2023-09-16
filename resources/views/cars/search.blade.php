@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
     <head>
         <style>
             .custom-card {
@@ -147,15 +149,55 @@
 
                 </div>
             </div>
+            <h1 class="mt-5 mb-3" style=";text-align: center">Recent Cars</h1>
+            <div id="recent-carousel" class="carousel slide shadow" data-ride="carousel"
+                style="width: 1280px; height: 720px;">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    @foreach ($recentCars as $key => $car)
+                        <li data-target="#recent-carousel" data-slide-to="{{ $key }}"
+                            class="{{ $key == 0 ? 'active' : '' }}"></li>
+                    @endforeach
+                </ol>
+
+                <!-- Slides -->
+                <div class="carousel-inner" style="width: 100%; height: 100%;">
+                    @foreach ($recentCars as $key => $car)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="width: 100%; height: 100%;">
+                            <img src="{{ asset($car->images[0]->image_path) }}"
+                                alt="{{ $car->carbrand }} - {{ $car->carmodel }}"
+                                style="object-fit: cover; width: 100%; height: 100%;">
+                            <div class="carousel-caption">
+                                <h3>{{ $car->carbrand }} - {{ $car->carmodel }}</h3>
+                                <p>Year: {{ $car->year }}, Mileage: {{ $car->mileage }}km</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Controls -->
+                <a class="carousel-control-prev" href="#recent-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#recent-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+
+
             <div class="card mt-5">
                 <div class="card-body">
                     <p>
                         Ne cherchez plus votre prochaine voiture. Visitez carmarketplace.com.
 
-                        Bienvenue sur carmarketplace.com. Vous y trouverez chaque jour plus de 1,4 million de véhicules en
+                        Bienvenue sur carmarketplace.com. Vous y trouverez chaque jour plus de 900 000 million de véhicules
+                        en
                         provenance
 
-                        de toute l’Europe et 30 000 du Maroc. Voitures neuves et d’occasion, petites cylindrées, voitures de
+                        du Maroc. Voitures neuves et d’occasion, petites cylindrées, voitures de
                         collection, limousines de luxe ou bonnes affaires : quel que soit le type de véhicule recherché,
                         vous le
                         trouverez sur carmarketplace.com.
