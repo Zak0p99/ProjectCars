@@ -30,8 +30,8 @@
                             <div class="carousel-inner">
                                 @foreach ($car->images as $key => $image)
                                     <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                        <img class="d-block w-100 car-image" src="{{ asset($image->image_path) }}"
-                                            alt="{{ $car->carModel }}">
+                                        <img style="object-fit: contain" class="d-block w-100 car-image"
+                                            src="{{ asset($image->image_path) }}" alt="{{ $car->carModel }}">
                                     </div>
                                 @endforeach
                             </div>
