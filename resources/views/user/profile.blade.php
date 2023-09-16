@@ -46,8 +46,17 @@
                             </div>
                         @endif
 
-                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                src="{{ asset($car->image) }}"></div>
+                        <div class="col-md-3 mt-1">
+                            @if ($car->images->count() > 0)
+                                <!-- Display the first image as a thumbnail with a maximum height -->
+                                <img class="img-fluid img-responsive rounded product-image"
+                                    src="{{ asset($car->images[0]->image_path) }}" style="max-height: 200px; width: 200px;">
+                            @else
+                                <!-- Display a default image or message if no images are available -->
+                                <img class="img-fluid img-responsive rounded product-image"
+                                    src="{{ asset('path_to_default_image.jpg') }}" alt="No Image">
+                            @endif
+                        </div>
                         <div class="col-md-6 mt-1">
                             <h2 style="color: black ; display:inline">{{ $car->carbrand }}</h2>
                             <b> - Modele :</b>
@@ -81,17 +90,22 @@
                                 </button>
                             </div>
                         </div>
-                        @Auth
-                            @if ($car->user_id == Auth::user()->id)
-                                <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Edit</a>
-                                </form>
-                            @endif
-                        @endauth
+                        <div class="d-flex justify-content-end">
+                            @Auth
+                                @if ($car->user_id == Auth::user()->id)
+                                    <form action="{{ route('cars.destroy', $car->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm mr-3 mb-5">Delete</button>
+                                        <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary mr-3 mb-5">Edit</a>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+
                     </div>
+
+                    <!-- Modal -->
                     <div class="modal fade" id="contactSellerModal_{{ $car->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="contactSellerModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

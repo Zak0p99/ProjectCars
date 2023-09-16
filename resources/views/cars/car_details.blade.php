@@ -78,7 +78,7 @@
                                     <strong>Created At:</strong> {{ $car->created_at }}
                                 </div>
                                 <div class="col-md-3">
-                                    <strong>User:</strong> <a
+                                    <strong>Seller:</strong> <a
                                         href="{{ route('user.profile', $car->user->id) }}">{{ $car->user->name }}</a>
                                 </div>
                             </div>
