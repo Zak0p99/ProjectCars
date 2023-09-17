@@ -119,7 +119,7 @@
 
                                         <!-- Dropdown for Maximum Mileage -->
                                         <div class="form-group">
-                                            <label for="maxMileage">Select Maximum Mileage:</label>
+                                            <label for="maxMileage">Select Maximum Kilometers:</label>
                                             <select id="maxMileage" name="maxMileage" class="form-control">
                                                 <option value="">Any</option>
                                                 @for ($mileage = 10000; $mileage <= 110000; $mileage += 10000)
